@@ -1,0 +1,972 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Garden Room | Garden Service Landing Page</title>
+  <meta name="description" content="The Garden Room creates and maintains beautiful garden spaces with seasonal care, planting design, and tailored maintenance plans.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f1e7;
+      --surface: #fffcf5;
+      --ink: #1b2a21;
+      --muted: #546353;
+      --line: #d9d0ba;
+      --green: #2f6b43;
+      --green-deep: #214b31;
+      --accent: #c97c46;
+      --shadow-soft: 0 14px 34px rgba(27, 42, 33, 0.12);
+      --shadow-card: 0 8px 20px rgba(27, 42, 33, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(90% 90% at 0% 0%, #dfead5 0%, transparent 60%),
+        radial-gradient(80% 80% at 100% 100%, #f1ddc6 0%, transparent 56%),
+        var(--bg);
+      line-height: 1.6;
+      overflow-x: clip;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin-inline: auto;
+    }
+
+    .site-header,
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .motion-ready .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .motion-ready .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 241, 231, 0.82);
+      border-bottom: 1px solid rgba(217, 208, 186, 0.75);
+      backdrop-filter: blur(9px);
+    }
+
+    .nav-wrap {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .mobile-quick {
+      display: none;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.78rem 1.2rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(47, 107, 67, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-deep);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      margin-top: 1rem;
+      border-radius: calc(var(--radius-lg) + 4px);
+      min-height: 74vh;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      background:
+        linear-gradient(105deg, rgba(16, 29, 21, 0.82) 18%, rgba(16, 29, 21, 0.58) 48%, rgba(16, 29, 21, 0.22) 80%),
+        url("https://images.pexels.com/photos/6511173/pexels-photo-6511173.jpeg?auto=compress&cs=tinysrgb&w=1800");
+      background-size: cover;
+      background-position: center;
+      animation: rise 850ms ease both;
+    }
+
+    .hero-copy {
+      padding: clamp(1.8rem, 4vw, 3.4rem);
+      color: #fcf8ef;
+      align-self: end;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(252, 248, 239, 0.45);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      margin-bottom: 1rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.4px;
+      background: rgba(252, 248, 239, 0.08);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      max-width: 13ch;
+    }
+
+    .hero-copy p {
+      max-width: 52ch;
+      margin-bottom: 1.5rem;
+      color: rgba(252, 248, 239, 0.95);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hero-note {
+      align-self: end;
+      margin: 0 clamp(1.2rem, 3vw, 2rem) clamp(1.3rem, 3vw, 2rem) 0;
+      background: rgba(255, 252, 245, 0.94);
+      border: 1px solid rgba(217, 208, 186, 0.88);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      box-shadow: var(--shadow-card);
+      max-width: 340px;
+      justify-self: end;
+    }
+
+    .hero-note h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.45rem;
+      color: var(--ink);
+    }
+
+    .hero-note p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-note ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+
+    .hero-note li::before {
+      content: "\2022 ";
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .trust-strip {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .trust-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      box-shadow: var(--shadow-card);
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    section {
+      padding: clamp(3rem, 6vw, 5.2rem) 0;
+    }
+
+    .section-head {
+      margin-bottom: 1.8rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+      margin-bottom: 0.65rem;
+    }
+
+    .section-head p {
+      max-width: 64ch;
+      color: var(--muted);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 26px rgba(27, 42, 33, 0.12);
+    }
+
+    .card .tag {
+      display: inline-flex;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green);
+      border: 1px solid rgba(47, 107, 67, 0.32);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      margin-bottom: 0.8rem;
+      background: rgba(47, 107, 67, 0.08);
+    }
+
+    .card h3 {
+      font-size: 1.38rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .section-transition {
+      min-height: 100svh;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+      border-top: 1px solid rgba(217, 208, 186, 0.9);
+      border-bottom: 1px solid rgba(217, 208, 186, 0.9);
+      background: linear-gradient(110deg, #183b2a 0%, #2f6b43 38%, #6f8044 62%, #c97c46 100%);
+      background-size: 180% 180%;
+      box-shadow: 0 14px 30px rgba(27, 42, 33, 0.18);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      isolation: isolate;
+      color: #fefbf4;
+      animation: bandFlow 8s ease-in-out infinite;
+    }
+
+    .section-transition .transition-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 0.75rem;
+      text-align: center;
+      padding-inline: 1rem;
+      max-width: 52ch;
+    }
+
+    .section-transition .transition-label {
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: clamp(0.9rem, 1.7vw, 1.2rem);
+      font-weight: 700;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(19, 35, 26, 0.28);
+      backdrop-filter: blur(2px);
+      justify-self: center;
+    }
+
+    .section-transition .transition-sub {
+      color: rgba(254, 251, 244, 0.94);
+      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      letter-spacing: 0.04em;
+    }
+
+    .section-transition::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.44) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: translateX(-140%) skewX(-20deg);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .section-transition::after {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 28% 45%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 38%),
+        radial-gradient(circle at 74% 62%, rgba(255, 222, 190, 0.28) 0%, rgba(255, 222, 190, 0) 42%);
+      opacity: 0.72;
+      animation: glowDrift 7s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    .section-transition .leaf {
+      position: absolute;
+      z-index: 2;
+      width: 12px;
+      height: 18px;
+      border-radius: 70% 30% 70% 30%;
+      background: rgba(255, 248, 236, 0.92);
+      box-shadow: 0 0 12px rgba(255, 244, 226, 0.55);
+      opacity: 0;
+      transform: translate(0, 0) rotate(-20deg) scale(0.65);
+    }
+
+    .section-transition .leaf-1 {
+      left: 8%;
+      bottom: 24%;
+    }
+
+    .section-transition .leaf-2 {
+      left: 14%;
+      bottom: 55%;
+      width: 10px;
+      height: 15px;
+    }
+
+    .section-transition .leaf-3 {
+      left: 20%;
+      bottom: 34%;
+      width: 9px;
+      height: 14px;
+    }
+
+    .motion-ready .section-transition.reveal.is-visible::before {
+      opacity: 1;
+      animation: sectionSweep 1150ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .motion-ready .section-transition.reveal.is-visible .leaf-1 {
+      animation: leafRun 2000ms cubic-bezier(0.16, 1, 0.3, 1) 100ms forwards;
+    }
+
+    .motion-ready .section-transition.reveal.is-visible .leaf-2 {
+      animation: leafRun 2000ms cubic-bezier(0.16, 1, 0.3, 1) 300ms forwards;
+    }
+
+    .motion-ready .section-transition.reveal.is-visible .leaf-3 {
+      animation: leafRun 2000ms cubic-bezier(0.16, 1, 0.3, 1) 480ms forwards;
+    }
+
+    .work-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s ease;
+    }
+
+    .work-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .work-item img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .work-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .work-body {
+      padding: 0.9rem 0.95rem 1rem;
+    }
+
+    .work-body h3 {
+      font-size: 1.14rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .work-body p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      background: var(--surface);
+      box-shadow: var(--shadow-card);
+    }
+
+    .step span {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(201, 124, 70, 0.15);
+      color: #8d4b1f;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .contact {
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius-lg) - 2px);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      background:
+        linear-gradient(120deg, rgba(47, 107, 67, 0.95), rgba(33, 75, 49, 0.95)),
+        var(--green);
+      color: #fefbf3;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+    }
+
+    .contact h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact p {
+      max-width: 48ch;
+      color: rgba(254, 251, 243, 0.92);
+      margin-bottom: 1rem;
+    }
+
+    .contact ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      color: rgba(254, 251, 243, 0.94);
+      font-size: 0.95rem;
+    }
+
+    .contact ul li::before {
+      content: "\2022 ";
+      color: #ffd9b9;
+    }
+
+    .mini-form {
+      background: rgba(255, 252, 245, 0.96);
+      border: 1px solid rgba(217, 208, 186, 0.9);
+      border-radius: 14px;
+      padding: 1rem;
+      color: var(--ink);
+      display: grid;
+      gap: 0.6rem;
+      align-self: start;
+    }
+
+    .mini-form label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .mini-form input,
+    .mini-form textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d6cfbe;
+      padding: 0.7rem 0.8rem;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .mini-form textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .mini-form .btn-primary {
+      width: 100%;
+    }
+
+    footer {
+      padding: 2.1rem 0 2.8rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @keyframes sectionSweep {
+      from {
+        transform: translateX(-140%) skewX(-20deg);
+      }
+      to {
+        transform: translateX(140%) skewX(-20deg);
+      }
+    }
+
+    @keyframes bandFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes glowDrift {
+      from {
+        transform: translateX(-4%) scale(1);
+      }
+      to {
+        transform: translateX(4%) scale(1.06);
+      }
+    }
+
+    @keyframes leafRun {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(-24deg) scale(0.6);
+      }
+      15% {
+        opacity: 0.95;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(120vw, -36px) rotate(22deg) scale(1.05);
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: 70vh;
+      }
+
+      .hero-note {
+        margin: 0 1.2rem 1.2rem;
+        justify-self: start;
+      }
+
+      .trust-strip,
+      .service-grid,
+      .work-grid,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 660px) {
+      .container {
+        width: min(1140px, 94%);
+      }
+
+      .nav-wrap {
+        min-height: 72px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-quick {
+        display: flex;
+      }
+
+      .mobile-quick .btn {
+        padding: 0.62rem 0.95rem;
+        font-size: 0.86rem;
+      }
+
+      .hero {
+        min-height: 84svh;
+      }
+
+      .hero-copy {
+        padding: 1.2rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-note {
+        width: auto;
+        max-width: none;
+        margin: 0 1rem 1rem;
+      }
+
+      .trust-strip,
+      .service-grid,
+      .work-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .section-transition {
+        min-height: 86svh;
+      }
+
+      .section-transition .transition-inner {
+        gap: 0.58rem;
+      }
+
+      .section-transition .transition-label {
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+      }
+
+      .section-transition .transition-sub {
+        font-size: 0.88rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .section-transition::before {
+        animation: none;
+        opacity: 0;
+      }
+
+      .section-transition,
+      .section-transition::after,
+      .section-transition .leaf {
+        animation: none;
+      }
+
+      .section-transition .leaf {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#top" class="brand">The <span>Garden Room</span></a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact" class="btn btn-primary">Get Quote</a>
+      </nav>
+      <div class="mobile-quick">
+        <a href="tel:+27820575275" class="btn btn-primary">Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero" aria-label="Garden team caring for planted garden beds">
+      <div class="hero-copy">
+        <span class="kicker">Single Landing Page</span>
+        <h1>Beautiful gardens, zero guesswork.</h1>
+        <p>The Garden Room designs, refreshes, and maintains outdoor spaces for homes and small businesses. One team, one plan, done right every season.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Book a Visit</a>
+          <a href="#work" class="btn btn-ghost">View Work</a>
+        </div>
+      </div>
+      <aside class="hero-note" aria-label="Quick highlights">
+        <h3>What clients like most</h3>
+        <p>Clear pricing, dependable visits, and gardens that keep improving month after month.</p>
+        <ul>
+          <li>Free site walk + quote</li>
+          <li>Weekly or monthly maintenance plans</li>
+          <li>Plant choices matched to your space</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="trust-strip reveal" aria-label="Business highlights">
+      <div class="trust-item">Fully Insured Team</div>
+      <div class="trust-item">Flexible Maintenance Plans</div>
+      <div class="trust-item">Eco-Conscious Garden Care</div>
+      <div class="trust-item">1 Business Day Responses</div>
+    </section>
+
+    <section id="services" class="reveal">
+      <div class="section-head">
+        <h2>Services for every season</h2>
+        <p>Choose one-time support or build a recurring plan. We tailor each visit to plant health, tidy edges, and long-term garden shape.</p>
+      </div>
+      <div class="service-grid">
+        <article class="card">
+          <span class="tag">Popular</span>
+          <h3>Routine Maintenance</h3>
+          <p>Edging, pruning, weeding, and garden tidying on a weekly or monthly schedule.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Design</span>
+          <h3>Planting Plans</h3>
+          <p>Color-balanced, low-stress planting selections for beds, borders, and containers.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Seasonal</span>
+          <h3>Spring/Fall Reset</h3>
+          <p>Full seasonal cleanups, soil refresh, and preparation for healthy growth in the next cycle.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-transition reveal" aria-hidden="true">
+      <div class="transition-inner">
+        <span class="transition-label">Garden Transformations</span>
+        <span class="transition-sub">Scroll down to view our recent work</span>
+      </div>
+      <span class="leaf leaf-1"></span>
+      <span class="leaf leaf-2"></span>
+      <span class="leaf leaf-3"></span>
+    </div>
+
+    <section id="work" class="reveal">
+      <div class="section-head">
+        <h2>Recent projects (placeholders)</h2>
+        <p>Swap these placeholder images with your own project photos and keep the same layout for a polished portfolio section.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-item">
+          <img src="https://picsum.photos/seed/garden-room-work-1/900/650" alt="Placeholder image for front garden transformation">
+          <div class="work-body">
+            <h3>Front Garden Refresh</h3>
+            <p>Bed redesign, lawn repair, and pathway edging.</p>
+          </div>
+        </article>
+        <article class="work-item">
+          <img src="https://picsum.photos/seed/garden-room-work-2/900/650" alt="Placeholder image for patio planting project">
+          <div class="work-body">
+            <h3>Patio Planting Setup</h3>
+            <p>Container layering with drought-friendly varieties.</p>
+          </div>
+        </article>
+        <article class="work-item">
+          <img src="https://picsum.photos/seed/garden-room-work-3/900/650" alt="Placeholder image for pathway and hedge cleanup">
+          <div class="work-body">
+            <h3>Path + Hedge Clean-up</h3>
+            <p>Seasonal shaping and debris removal for a tidy finish.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="process" class="reveal">
+      <div class="section-head">
+        <h2>How it works</h2>
+        <p>A simple, predictable process so you always know what happens next.</p>
+      </div>
+      <div class="process">
+        <article class="step">
+          <span>1</span>
+          <h3>Quick consultation</h3>
+          <p>Tell us what you need and share photos or book an on-site walk-through.</p>
+        </article>
+        <article class="step">
+          <span>2</span>
+          <h3>Custom plan + quote</h3>
+          <p>We send a clear scope with pricing, timing, and service frequency options.</p>
+        </article>
+        <article class="step">
+          <span>3</span>
+          <h3>Care begins</h3>
+          <p>Your garden gets consistent expert care with seasonal adjustments as needed.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact reveal">
+      <div>
+        <h2>Ready to refresh your garden?</h2>
+        <p>Use the quick form and we will get back to you with next steps. If you prefer to call, we are available Monday to Saturday.</p>
+        <ul>
+          <li>Phone: <a href="tel:+27820575275">+27 82 057 5275</a></li>
+          <li>Email: <a href="mailto:hello@thegardenroom.co.za">hello@thegardenroom.co.za</a></li>
+          <li>Hours: Mon-Sat, 8:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+      <form class="mini-form" action="#" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        <label for="message">What do you need help with?</label>
+        <textarea id="message" name="message" placeholder="Tell us about your garden project"></textarea>
+        <button class="btn btn-primary" type="submit">Request Quote</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <strong>The Garden Room</strong> | Garden Services Landing Page
+  </footer>
+  <script>
+    (() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealItems = document.querySelectorAll(".reveal");
+
+      if (reduceMotion) {
+        revealItems.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+
+      document.body.classList.add("motion-ready");
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: "0px 0px -40px 0px" });
+
+      revealItems.forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
+
