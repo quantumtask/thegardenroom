@@ -193,13 +193,17 @@
           <li>Hours: Mon-Sat, 8:00 AM - 6:00 PM</li>
         </ul>
       </div>
-      <form class="mini-form" action="#" method="post">
+      <form class="mini-form" action="https://formsubmit.co/hello@thegardenroom.co.za" method="post">
+        <input type="hidden" name="_subject" value="New Garden Room website enquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://thegardenroom.quantumtask.io/#contact">
         <label for="name">Name</label>
         <input id="name" name="name" type="text" placeholder="Your name" required>
         <label for="email">Email</label>
         <input id="email" name="email" type="email" placeholder="you@example.com" required>
         <label for="message">What do you need help with?</label>
-        <textarea id="message" name="message" placeholder="Tell us about your garden project"></textarea>
+        <textarea id="message" name="message" placeholder="Tell us about your garden project" required></textarea>
         <button class="btn btn-primary" type="submit">Request Quote</button>
       </form>
     </section>
