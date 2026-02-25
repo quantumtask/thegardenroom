@@ -1,4 +1,50 @@
 (() => {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const header = document.querySelector(".site-header");
+      const hashLinks = Array.from(document.querySelectorAll('a[href^="#"]'))
+        .filter((link) => link.getAttribute("href") && link.getAttribute("href") !== "#");
+
+      const getHeaderOffset = () => {
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        return Math.round(headerHeight + 10);
+      };
+
+      const scrollToHash = (hash, updateHistory = true) => {
+        const id = hash.replace("#", "");
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const top = window.scrollY + target.getBoundingClientRect().top - getHeaderOffset();
+        window.scrollTo({
+          top: Math.max(0, top),
+          behavior: prefersReduced ? "auto" : "smooth"
+        });
+
+        if (updateHistory) {
+          history.pushState(null, "", hash);
+        }
+      };
+
+      hashLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const hash = link.getAttribute("href");
+          if (!hash) return;
+          const target = document.getElementById(hash.slice(1));
+          if (!target) return;
+          event.preventDefault();
+          scrollToHash(hash);
+        });
+      });
+
+      window.addEventListener("load", () => {
+        if (!location.hash) return;
+        const target = document.getElementById(location.hash.slice(1));
+        if (!target) return;
+        scrollToHash(location.hash, false);
+      });
+    })();
+
+(() => {
       const menuToggle = document.querySelector(".menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
       if (!menuToggle || !mobileMenu) return;
@@ -37,6 +83,17 @@
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") closeMenu();
       });
+
+      const desktopMedia = window.matchMedia("(min-width: 661px)");
+      const handleDesktop = (event) => {
+        if (event.matches) closeMenu();
+      };
+
+      if (typeof desktopMedia.addEventListener === "function") {
+        desktopMedia.addEventListener("change", handleDesktop);
+      } else if (typeof desktopMedia.addListener === "function") {
+        desktopMedia.addListener(handleDesktop);
+      }
     })();
 (() => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
