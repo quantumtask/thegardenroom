@@ -655,8 +655,11 @@
       <div class="contact-right">
         <h3>Get a quote</h3>
         <p>I'll reply within 24 hours with the best package, timeline, and next steps.</p>
-        <form class="card contact-form" action="" method="post">
-          <!-- Connect to Formspree/Netlify Forms endpoint -->
+        <form class="card contact-form" action="https://formsubmit.co/daniel@quantumtask.io" method="post">
+          <input type="hidden" name="_subject" value="New quantumtask.io website enquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://quantumtask.io/#contact">
           <div class="form-group">
             <label for="full-name">Name</label>
             <input id="full-name" name="full-name" type="text" autocomplete="name" required>
@@ -845,23 +848,6 @@
     });
   }
 
-  // contact form success message (no backend)
-  const contactFormEl = document.querySelector('.contact-form');
-  const contactSuccess = document.querySelector('.form-success');
-  if (contactFormEl) {
-    contactFormEl.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!contactFormEl.checkValidity()) {
-        contactFormEl.reportValidity();
-        return;
-      }
-      if (contactSuccess) {
-        contactSuccess.hidden = false;
-      }
-      contactFormEl.reset();
-    });
-  }
-
   // how-it-works background zoom on scroll
   const howSection = document.getElementById('how-it-works');
   if (howSection) {
@@ -883,7 +869,6 @@
 <!-- BUILD_ID: a5002b5 -->
 </body>
 </html>
-
 
 
 
